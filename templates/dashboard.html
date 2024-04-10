@@ -3,60 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flask imitation of React</title>
-    <style>
-        /* CSS стили здесь */
-        .courseBox {
-            width: 300px;
-            height: 300px;
-            margin: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background-color: #f8f8f8;
-        }
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}" type="text/css">
 
-        .topContent {
-            background-color: #2c3e50;
-            color: #fff;
-            padding: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .topContent h3 {
-            margin: 0;
-        }
-
-        .fav {
-            cursor: pointer;
-        }
-
-        .bottomContent {
-            padding: 10px;
-        }
-
-        .courseName {
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .courseDesc {
-            margin-bottom: 10px;
-        }
-
-        .courseDetails {
-            font-size: 12px;
-            color: #777;
-        }
-    </style>
 </head>
 <body>
-    <div id="root">
+    <header class="header">
+        <h1>Dashboard</h1>
+        <div>
+            <button class="button">Войти</button>
+        </div>
+    </header>
+    <button class="add_button"  onclick="window.location.href='http://127.0.0.1:5000/';">Добавить курс</button>
+    <input type="text" placeholder="Поиск по названию курса" class="search">
+
+    <div id="root" class="courses">
+        
         <!-- Контент будет добавлен с помощью JavaScript -->
     </div>
     <script>
@@ -71,7 +33,7 @@
 
                     const topContent = document.createElement('div');
                     topContent.classList.add('topContent');
-                    topContent.style.backgroundColor = `rgb(${randomColor()}, ${randomColor()}, ${randomColor()})`;
+                    topContent.style.backgroundColor = `rgb(88, 1, 145)`;;
 
                     const fav = document.createElement('div');
                     fav.classList.add('fav');
@@ -101,8 +63,13 @@
                     bottomContent.appendChild(courseDesc);
                     bottomContent.appendChild(courseDetails);
 
+                    const editButton = document.createElement('button');
+                    editButton.classList.add('editButton');
+                    editButton.innerText = 'Изменить курс';
+
                     courseBox.appendChild(topContent);
                     courseBox.appendChild(bottomContent);
+                    courseBox.appendChild(editButton);
 
                     root.appendChild(courseBox);
                 });
@@ -111,6 +78,32 @@
         function randomColor() {
             return Math.floor(Math.random() * 256);
         }
+        // Получаем ссылки на элементы поиска и корневой элемент, содержащий курсы
+const searchInput = document.querySelector('.search');
+const root = document.getElementById('root');
+
+// Добавляем обработчик события на поле ввода поиска
+searchInput.addEventListener('input', function() {
+    // Получаем значение введенное пользователем и приводим его к нижнему регистру
+    const searchText = this.value.trim().toLowerCase();
+
+    // Получаем все элементы курсов
+    const courseBoxes = root.querySelectorAll('.courseBox');
+
+    // Перебираем каждый элемент курса и скрываем те, которые не соответствуют поисковому запросу
+    courseBoxes.forEach(courseBox => {
+        const courseTitle = courseBox.querySelector('h3').innerText.toLowerCase();
+        if (courseTitle.includes(searchText)) {
+            courseBox.style.display = 'block';
+        } else {
+            courseBox.style.display = 'none';
+        }
+    });
+});
+
     </script>
+    <footer>
+
+    </footer>
 </body>
 </html>

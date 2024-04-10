@@ -101,3 +101,50 @@ button:hover {
   max-width: 550px
   
 }
+.courseBox {
+  width: 300px;
+  height: 300px;
+  margin: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #f8f8f8;
+}
+
+.topContent {
+  background-color: #2c3e50;
+  color: #fff;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.topContent h3 {
+  margin: 0;
+}
+
+.fav {
+  cursor: pointer;
+}
+
+.bottomContent {
+  padding: 10px;
+}
+
+.courseName {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.courseDesc {
+  margin-bottom: 10px;
+}
+
+.courseDetails {
+  font-size: 12px;
+  color: #777;
+}
