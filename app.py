@@ -37,20 +37,21 @@ def add_course():
             chapter_content = {
                 'title': request.form.get(f'chapter_title_{chapter_num}'),
                 'content': request.form.get(f'chapter_content_{chapter_num}'),
-                'text_blocks': [],
-                'video_links': []
+                'code': [],
+                'image': [],
+                'text': [],
+                'video': []
             }
 
-            for text_block_key, text_block_value in request.form.items():
-                if text_block_key.startswith(f'chapter_text_block_{chapter_num}_'):
-                    chapter_content['text_blocks'].append(request.form.get(text_block_key))
-
-            def process_video_links(chapter_num):
-                video_links = [request.form.get(video_link_key) for video_link_key, _ in request.form.items() if video_link_key.startswith(f'chapter_video_link_{chapter_num}_')]
-                embed_video_links = [convert_to_embed_url(video_link) for video_link in video_links]
-                chapter_content['video_links'].extend(embed_video_links)
-
-            process_video_links(chapter_num)
+            for block_key, block_value in request.form.items():
+                if block_key.startswith(f'chapter_code_{chapter_num}_'):
+                    chapter_content['code'].append(request.form.get(block_key))
+                elif block_key.startswith(f'chapter_image_{chapter_num}_'):
+                    chapter_content['image'].append(request.form.get(block_key))
+                elif block_key.startswith(f'chapter_text_{chapter_num}_'):
+                    chapter_content['text'].append(request.form.get(block_key))
+                elif block_key.startswith(f'chapter_video_{chapter_num}_'):
+                    chapter_content['video'].append(request.form.get(block_key))                                
 
             chapters.append(chapter_content)
 
@@ -80,6 +81,7 @@ def add_course():
     doc_ref.set(data)
 
     return 'Курс успешно добавлен и сохранен в Firestore.'
+
 
 if __name__ == '__main__':
     app.run(debug=True)
