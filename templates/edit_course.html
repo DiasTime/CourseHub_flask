@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-{% set enumerate = namespace(__builtins__=loop, map=lambda args: loop.index0) %}
 
 <html lang="en">
 <head>
@@ -7,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изменение курса</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
-
 </head>
 <body>
     <header>
@@ -38,18 +36,17 @@
 
             <label for="course_slogan">Слоган:</label>
             <input type="text" id="course_slogan" name="course_slogan" value="{{ course['course_slogan'] }}" required><br>
-            {% set counter = 0 %}
 
+            {% set counter = 1 %}
             {% for description in course['course_descriptions'] %}
-            {% set counter = counter + 1 %}
             <label for="course_description_{{ counter }}">Описание курса {{ counter }}:</label>
             <input type="text" id="course_description_{{ counter }}" name="course_description_{{ counter }}" value="{{ description }}" required><br>
+            {% set counter = counter + 1 %}
             {% endfor %}
 
             <!-- Поля для изменения данных глав -->
-            {% set counter = 0 %}
+            {% set counter = 1 %}
             {% for chapter in course['chapters'] %}
-            {% set counter = counter + 1 %}
             <hr>
             <h2>Глава {{ counter }}</h2>
             <label for="chapter_title_{{ counter }}">Заголовок главы:</label>
@@ -58,9 +55,8 @@
             <textarea id="chapter_content_{{ counter }}" name="chapter_content_{{ counter }}" required>{{ chapter['content'] }}</textarea><br>
 
             <!-- Блоки текста, видео, кода и изображений для каждой главы -->
-            {% set block_counter = 0 %}
+            {% set block_counter = 1 %}
             {% for block in chapter['blocks'] %}
-            {% set block_counter = block_counter + 1 %}
             {% if block['type'] == 'text' %}
             <label for="chapter_text_{{ counter }}_{{ block_counter }}">Текст:</label>
             <textarea id="chapter_text_{{ counter }}_{{ block_counter }}" name="chapter_text_{{ counter }}_{{ block_counter }}" required>{{ block['data'] }}</textarea><br>
@@ -74,9 +70,10 @@
             <label for="chapter_image_{{ counter }}_{{ block_counter }}">Изображение:</label>
             <input type="text" id="chapter_image_{{ counter }}_{{ block_counter }}" name="chapter_image_{{ counter }}_{{ block_counter }}" value="{{ block['data'] }}" required><br>
             {% endif %}
+            {% set block_counter = block_counter + 1 %}
             {% endfor %}
+            {% set counter = counter + 1 %}
             {% endfor %}
-
 
             <button type="submit">Сохранить изменения</button>
         </form>
