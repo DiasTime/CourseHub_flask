@@ -29,23 +29,37 @@ def upload():
         questions = []
         current_question = {}
         for paragraph in doc.paragraphs:
-            if paragraph.text.strip() == '':
-                # Новый вопрос начинается
-                if current_question:
-                    questions.append(current_question)
-                current_question = {}
-            elif 'title' not in current_question:
-                current_question['title'] = paragraph.text
-            elif 'variants' not in current_question:
-                current_question['variants'] = paragraph.text.split(',')
-            elif 'correct' not in current_question:
-                current_question['correct'] = int(paragraph.text)
+            # Разбиваем строку по знаку переноса строки на составляющие
+            parts = paragraph.text.split('\n')
+            # Извлекаем данные вопроса из каждой строки
+            for part in parts:
+                # Если строка не пустая
+                if part.strip() != '':
+                    # Ищем метку вопроса
+                    if part.startswith('<q'):
+                        if current_question:
+                            questions.append(current_question)
+                        current_question = {'title': ''}
+                        # Извлекаем номер вопроса из метки
+                        current_question['title'] = part.split('>')[1]
+                    # Ищем варианты ответов
+                    elif part.startswith('<v'):
+                        if 'variants' not in current_question:
+                            current_question['variants'] = []
+                        # Извлекаем варианты ответов из метки
+                        current_question['variants'].append(part.split('>')[1])
+                    # Ищем правильный ответ
+                    elif part.startswith('<a>'):
+                        # Извлекаем правильный ответ из метки
+                        current_question['correct'] = int(part.split('>')[1])
+
         if current_question:
             questions.append(current_question)
         
         # Сохранение вопросов в Firestore
         db.collection('tests').add({'questions': questions})
         return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True,port=5004)
