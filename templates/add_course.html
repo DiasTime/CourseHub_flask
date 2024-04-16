@@ -49,7 +49,6 @@
 
             <button type="submit">Добавить курс</button>
         </form>
-        <iframe src="https://learningapps.org/watch?app=23837969" style="border:0px;width:100%;height:500px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
     </div>
 
     <script>
@@ -65,14 +64,12 @@
                 <label for="chapter_content_${nextChapterNum}">Содержание главы ${nextChapterNum}:</label>
                 <textarea id="chapter_content_${nextChapterNum}" name="chapter_content_${nextChapterNum}" required></textarea><br>
 
-
                 <div id="text_blocks_${nextChapterNum}"></div>
-                <div id="video_links_${nextChapterNum}"></div>
-                <button type="button" onclick="addTextBlock(${nextChapterNum})">Добавить текстовый блок</button><br>
-                
+                <button type="button" onclick="addCodeBlock(${nextChapterNum})">Добавить код</button>
+                <button type="button" onclick="addImageBlock(${nextChapterNum})">Добавить изображение</button>
+                <button type="button" onclick="addTextBlock(${nextChapterNum})">Добавить текст</button>
+                <button type="button" onclick="addVideoBlock(${nextChapterNum})">Добавить Видео</button><br>
 
-                <button type="button" onclick="addVideoLink(${nextChapterNum})">Добавить ссылку на видео</button><br>
-                
             `;
             chaptersDiv.appendChild(chapterDiv);
         }
@@ -83,22 +80,46 @@
 
             var textBlockDiv = document.createElement('div');
             textBlockDiv.innerHTML = `
-                <label for="chapter_text_block_${chapterId}_${nextTextBlockNum}">Текстовый блок ${nextTextBlockNum}:</label>
-                <textarea id="chapter_text_block_${chapterId}_${nextTextBlockNum}" name="chapter_text_block_${chapterId}_${nextTextBlockNum}" required></textarea><br>
+                <label for="chapter_text_${chapterId}_${nextTextBlockNum}">Текст:</label>
+                <textarea id="chapter_text_${chapterId}_${nextTextBlockNum}" name="chapter_text_${chapterId}_${nextTextBlockNum}" required></textarea><br>
             `;
             textBlocksDiv.appendChild(textBlockDiv);
         }
 
-        function addVideoLink(chapterId) {
-            var videoLinksDiv = document.getElementById(`video_links_${chapterId}`);
-            var nextVideoLinkNum = videoLinksDiv.children.length + 1;
+        function addVideoBlock(chapterId) {
+            var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
+            var nextTextBlockNum = textBlocksDiv.children.length + 1;
 
-            var videoLinkDiv = document.createElement('div');
-            videoLinkDiv.innerHTML = `
-                <label for="chapter_video_link_${chapterId}_${nextVideoLinkNum}">Ссылка на видео ${nextVideoLinkNum}:</label>
-                <input type="text" id="chapter_video_link_${chapterId}_${nextVideoLinkNum}" name="chapter_video_link_${chapterId}_${nextVideoLinkNum}" required><br>
+            var videoBlockDiv = document.createElement('div');
+            videoBlockDiv.innerHTML = `
+                <label for="chapter_video_${chapterId}_${nextTextBlockNum}">Видео:</label>
+                <textarea id="chapter_video_${chapterId}_${nextTextBlockNum}" name="chapter_video_${chapterId}_${nextTextBlockNum}" required></textarea><br>
             `;
-            videoLinksDiv.appendChild(videoLinkDiv);
+            textBlocksDiv.appendChild(videoBlockDiv);
+        }
+
+        function addCodeBlock(chapterId) {
+            var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
+            var nextTextBlockNum = textBlocksDiv.children.length + 1;
+
+            var codeBlockDiv = document.createElement('div');
+            codeBlockDiv.innerHTML = `
+                <label for="chapter_code_${chapterId}_${nextTextBlockNum}">Код:</label>
+                <textarea id="chapter_code_${chapterId}_${nextTextBlockNum}" name="chapter_code_${chapterId}_${nextTextBlockNum}" required></textarea><br>
+            `;
+            textBlocksDiv.appendChild(codeBlockDiv);
+        }
+
+        function addImageBlock(chapterId) {
+            var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
+            var nextTextBlockNum = textBlocksDiv.children.length + 1;
+
+            var imageBlockDiv = document.createElement('div');
+            imageBlockDiv.innerHTML = `
+                <label for="chapter_image_${chapterId}_${nextTextBlockNum}">Изображение:</label>
+                <input type="text" id="chapter_image_${chapterId}_${nextTextBlockNum}" name="chapter_image_${chapterId}_${nextTextBlockNum}" required><br>
+            `;
+            textBlocksDiv.appendChild(imageBlockDiv);
         }
 
         function addCourseDescription() {

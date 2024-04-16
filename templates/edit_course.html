@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Редактирование курса</title>
+</head>
+<body>
+    <h1>Редактирование курса</h1>
+    <form action="/edit_course/{{ course.courseId }}" method="post">
+        <label for="title">Название курса:</label>
+        <input type="text" id="title" name="title" required value="{{ course.title }}"><br>
+ 
+        <label for="author">Автор:</label>
+        <input type="text" id="author" name="author" required value="{{ course.author }}"><br>
+ 
+        <label for="date">Дата:</label>
+        <input type="date" id="date" name="date" required value="{{ course.date }}"><br>
+ 
+        <label for="video_src">Ссылка на видео:</label>
+        <input type="text" id="video_src" name="video_src" required value="{{ course.video_src }}"><br>
+       
+        <label for="course_name">Краткое описание:</label>
+        <input type="text" id="course_name" name="course_name" required value="{{ course.course_name }}"><br>
+ 
+        <label for="course_slogan">Слоган:</label>
+        <input type="text" id="course_slogan" name="course_slogan" required value="{{ course.course_slogan }}"><br>
+
+        <!-- Добавление полей для глав -->
+        {% for chapter in course.chapters %}
+        <div>
+            <label for="chapter_title">Заголовок главы:</label>
+            <input type="text" id="chapter_title" name="chapter_title_{{ loop.index }}" value="{{ chapter.title }}"><br>
+
+            <label for="chapter_content">Содержание главы:</label>
+            <textarea id="chapter_content" name="chapter_content_{{ loop.index }}" required>{{ chapter.content }}</textarea><br>
+
+            <!-- Добавление текстовых блоков -->
+            {% for text_block in chapter.text_blocks %}
+            <label for="text_block">Текстовый блок:</label>
+            <textarea id="text_block" name="chapter_text_block_{{ loop.parent.loop.index }}_{{ loop.index }}" required>{{ text_block }}</textarea><br>
+            {% endfor %}
+
+            <!-- Добавление ссылок на видео -->
+            {% for video_link in chapter.video_links %}
+            <label for="video_link">Ссылка на видео:</label>
+            <input type="text" id="video_link" name="chapter_video_link_{{ loop.parent.loop.index }}_{{ loop.index }}" required value="{{ video_link }}"><br>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <!-- Добавление полей для описаний -->
+        {% for description in course.course_descriptions %}
+        <label for="course_description">Описание курса:</label>
+        <textarea id="course_description" name="course_description_{{ loop.index }}" required>{{ description }}</textarea><br>
+        {% endfor %}
+
+        <input type="hidden" name="num_chapters" value="{{ course.chapters|length }}">
+        <input type="hidden" name="num_descriptions" value="{{ course.course_descriptions|length }}">
+
+        <button type="submit">Сохранить изменения</button>
+    </form>
+</body>
+</html>
