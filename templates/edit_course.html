@@ -1,10 +1,13 @@
 <!DOCTYPE html>
+{% set enumerate = namespace(__builtins__=loop, map=lambda args: loop.index0) %}
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изменение курса</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+
 </head>
 <body>
     <header>
@@ -35,35 +38,41 @@
 
             <label for="course_slogan">Слоган:</label>
             <input type="text" id="course_slogan" name="course_slogan" value="{{ course['course_slogan'] }}" required><br>
+            {% set counter = 0 %}
 
-            {% for description_num, description in enumerate(course['course_descriptions'], 1) %}
-            <label for="course_description_{{ description_num }}">Описание курса {{ description_num }}:</label>
-            <input type="text" id="course_description_{{ description_num }}" name="course_description_{{ description_num }}" value="{{ description }}" required><br>
+            {% for description in course['course_descriptions'] %}
+            {% set counter = counter + 1 %}
+            <label for="course_description_{{ counter }}">Описание курса {{ counter }}:</label>
+            <input type="text" id="course_description_{{ counter }}" name="course_description_{{ counter }}" value="{{ description }}" required><br>
             {% endfor %}
 
             <!-- Поля для изменения данных глав -->
-            {% for chapter_num, chapter in enumerate(course['chapters'], 1) %}
+            {% set counter = 0 %}
+            {% for chapter in course['chapters'] %}
+            {% set counter = counter + 1 %}
             <hr>
-            <h2>Глава {{ chapter_num }}</h2>
-            <label for="chapter_title_{{ chapter_num }}">Заголовок главы:</label>
-            <input type="text" id="chapter_title_{{ chapter_num }}" name="chapter_title_{{ chapter_num }}" value="{{ chapter['title'] }}" required><br>
-            <label for="chapter_content_{{ chapter_num }}">Содержание главы:</label>
-            <textarea id="chapter_content_{{ chapter_num }}" name="chapter_content_{{ chapter_num }}" required>{{ chapter['content'] }}</textarea><br>
+            <h2>Глава {{ counter }}</h2>
+            <label for="chapter_title_{{ counter }}">Заголовок главы:</label>
+            <input type="text" id="chapter_title_{{ counter }}" name="chapter_title_{{ counter }}" value="{{ chapter['title'] }}" required><br>
+            <label for="chapter_content_{{ counter }}">Содержание главы:</label>
+            <textarea id="chapter_content_{{ counter }}" name="chapter_content_{{ counter }}" required>{{ chapter['content'] }}</textarea><br>
 
             <!-- Блоки текста, видео, кода и изображений для каждой главы -->
-            {% for block_num, block in enumerate(chapter['blocks'], 1) %}
+            {% set block_counter = 0 %}
+            {% for block in chapter['blocks'] %}
+            {% set block_counter = block_counter + 1 %}
             {% if block['type'] == 'text' %}
-            <label for="chapter_text_{{ chapter_num }}_{{ block_num }}">Текст:</label>
-            <textarea id="chapter_text_{{ chapter_num }}_{{ block_num }}" name="chapter_text_{{ chapter_num }}_{{ block_num }}" required>{{ block['data'] }}</textarea><br>
+            <label for="chapter_text_{{ counter }}_{{ block_counter }}">Текст:</label>
+            <textarea id="chapter_text_{{ counter }}_{{ block_counter }}" name="chapter_text_{{ counter }}_{{ block_counter }}" required>{{ block['data'] }}</textarea><br>
             {% elif block['type'] == 'video' %}
-            <label for="chapter_video_{{ chapter_num }}_{{ block_num }}">Видео:</label>
-            <input type="text" id="chapter_video_{{ chapter_num }}_{{ block_num }}" name="chapter_video_{{ chapter_num }}_{{ block_num }}" value="{{ block['data'] }}" required><br>
+            <label for="chapter_video_{{ counter }}_{{ block_counter }}">Видео:</label>
+            <input type="text" id="chapter_video_{{ counter }}_{{ block_counter }}" name="chapter_video_{{ counter }}_{{ block_counter }}" value="{{ block['data'] }}" required><br>
             {% elif block['type'] == 'code' %}
-            <label for="chapter_code_{{ chapter_num }}_{{ block_num }}">Код:</label>
-            <textarea id="chapter_code_{{ chapter_num }}_{{ block_num }}" name="chapter_code_{{ chapter_num }}_{{ block_num }}" required>{{ block['data'] }}</textarea><br>
+            <label for="chapter_code_{{ counter }}_{{ block_counter }}">Код:</label>
+            <textarea id="chapter_code_{{ counter }}_{{ block_counter }}" name="chapter_code_{{ counter }}_{{ block_counter }}" required>{{ block['data'] }}</textarea><br>
             {% elif block['type'] == 'image' %}
-            <label for="chapter_image_{{ chapter_num }}_{{ block_num }}">Изображение:</label>
-            <input type="text" id="chapter_image_{{ chapter_num }}_{{ block_num }}" name="chapter_image_{{ chapter_num }}_{{ block_num }}" value="{{ block['data'] }}" required><br>
+            <label for="chapter_image_{{ counter }}_{{ block_counter }}">Изображение:</label>
+            <input type="text" id="chapter_image_{{ counter }}_{{ block_counter }}" name="chapter_image_{{ counter }}_{{ block_counter }}" value="{{ block['data'] }}" required><br>
             {% endif %}
             {% endfor %}
             {% endfor %}
