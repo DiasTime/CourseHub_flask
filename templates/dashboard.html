@@ -24,58 +24,62 @@
     <script>
         // JavaScript для имитации React
         fetch('/courses')
-            .then(response => response.json())
-            .then(courses => {
-                const root = document.getElementById('root');
-                courses.forEach(course => {
-                    const courseBox = document.createElement('div');
-                    courseBox.classList.add('courseBox');
+    .then(response => response.json())
+    .then(courses => {
+        const root = document.getElementById('root');
+        courses.forEach(course => {
+            const courseBox = document.createElement('div');
+            courseBox.classList.add('courseBox');
 
-                    const topContent = document.createElement('div');
-                    topContent.classList.add('topContent');
-                    topContent.style.backgroundColor = `rgb(88, 1, 145)`;;
+            const topContent = document.createElement('div');
+            topContent.classList.add('topContent');
+            topContent.style.backgroundColor = `rgb(88, 1, 145)`;;
 
-                    const fav = document.createElement('div');
-                    fav.classList.add('fav');
+            const fav = document.createElement('div');
+            fav.classList.add('fav');
 
-                    const h3 = document.createElement('h3');
-                    h3.innerText = course.title;
+            const h3 = document.createElement('h3');
+            h3.innerText = course.title;
 
-                    topContent.appendChild(h3);
-                    topContent.appendChild(fav);
+            topContent.appendChild(h3);
+            topContent.appendChild(fav);
 
-                    const bottomContent = document.createElement('div');
-                    bottomContent.classList.add('bottomContent');
+            const bottomContent = document.createElement('div');
+            bottomContent.classList.add('bottomContent');
 
-                    const courseName = document.createElement('p');
-                    courseName.classList.add('courseName');
-                    courseName.innerText = course.course_name;
+            const courseName = document.createElement('p');
+            courseName.classList.add('courseName');
+            courseName.innerText = course.course_name;
 
-                    const courseDesc = document.createElement('p');
-                    courseDesc.classList.add('courseDesc');
-                    courseDesc.innerText = course.course_slogan;
+            const courseDesc = document.createElement('p');
+            courseDesc.classList.add('courseDesc');
+            courseDesc.innerText = course.course_slogan;
 
-                    const courseDetails = document.createElement('div');
-                    courseDetails.classList.add('courseDetails');
-                    courseDetails.innerText = `${course.author} / ${course.date}`;
+            const courseDetails = document.createElement('div');
+            courseDetails.classList.add('courseDetails');
+            courseDetails.innerText = `${course.author} / ${course.date}`;
 
-                    bottomContent.appendChild(courseName);
-                    bottomContent.appendChild(courseDesc);
-                    bottomContent.appendChild(courseDetails);
+            bottomContent.appendChild(courseName);
+            bottomContent.appendChild(courseDesc);
+            bottomContent.appendChild(courseDetails);
 
-                    const editButton = document.createElement('button');
-                    editButton.classList.add('editButton');
-                    editButton.innerText = 'Изменить курс';
-
-                    
-
-                    courseBox.appendChild(topContent);
-                    courseBox.appendChild(bottomContent);
-                    courseBox.appendChild(editButton);
-
-                    root.appendChild(courseBox);
-                });
+            const editButton = document.createElement('button');
+            editButton.classList.add('editButton'); 
+            editButton.innerText = 'Изменить курс';
+            editButton.setAttribute('data-id', course.course_id);
+            editButton.addEventListener('click', function() {
+                const courseId = this.getAttribute('data-id');
+                const editUrl = `http://127.0.0.1:5002/edit_course/${courseId}`;
+                window.location.href = editUrl;
             });
+
+            courseBox.appendChild(topContent);
+            courseBox.appendChild(bottomContent);
+            courseBox.appendChild(editButton);
+
+            root.appendChild(courseBox);
+        });
+    });
 
         function randomColor() {
             return Math.floor(Math.random() * 256);
