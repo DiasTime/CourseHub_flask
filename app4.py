@@ -12,9 +12,12 @@ firebase_admin.initialize_app(cred)
 db = firestore.client()
 
 def get_course_documents():
+    
     courses_ref = db.collection('courses').get()
     courses = [course_doc.to_dict() for course_doc in courses_ref]
     return courses
+
+
 
 @app.route('/')
 def index():
