@@ -66,12 +66,21 @@
             const editButton = document.createElement('button');
             editButton.classList.add('editButton'); 
             editButton.innerText = 'Изменить курс';
-            editButton.setAttribute('data-id', course.course_id);
             editButton.addEventListener('click', function() {
-                const courseId = this.getAttribute('data-id');
-                const editUrl = `http://127.0.0.1:5002/edit_course/${courseId}`;
+                const editUrl = `http://127.0.0.1:5002/edit_course/${course.courseId}`;
                 window.location.href = editUrl;
             });
+
+            
+            const testButton = document.createElement('button');
+            testButton.classList.add('testButton'); 
+            testButton.innerText = 'Добавить тест';
+            testButton.addEventListener('click', function() {
+                const testUrl = `http://127.0.0.1:5004//add_test/${course.courseId}`;
+                window.location.href = testUrl;
+            });
+
+          
 
             courseBox.appendChild(topContent);
             courseBox.appendChild(bottomContent);

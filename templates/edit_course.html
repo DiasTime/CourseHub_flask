@@ -53,26 +53,14 @@
             <input type="text" id="chapter_title_{{ counter }}" name="chapter_title_{{ counter }}" value="{{ chapter['title'] }}" required><br>
             <label for="chapter_content_{{ counter }}">Содержание главы:</label>
             <textarea id="chapter_content_{{ counter }}" name="chapter_content_{{ counter }}" required>{{ chapter['content'] }}</textarea><br>
-
-            <!-- Блоки текста, видео, кода и изображений для каждой главы -->
-            {% set block_counter = 1 %}
-            {% for block in chapter['blocks'] %}
-            {% if block['type'] == 'text' %}
-            <label for="chapter_text_{{ counter }}_{{ block_counter }}">Текст:</label>
-            <textarea id="chapter_text_{{ counter }}_{{ block_counter }}" name="chapter_text_{{ counter }}_{{ block_counter }}" required>{{ block['data'] }}</textarea><br>
-            {% elif block['type'] == 'video' %}
-            <label for="chapter_video_{{ counter }}_{{ block_counter }}">Видео:</label>
-            <input type="text" id="chapter_video_{{ counter }}_{{ block_counter }}" name="chapter_video_{{ counter }}_{{ block_counter }}" value="{{ block['data'] }}" required><br>
-            {% elif block['type'] == 'code' %}
-            <label for="chapter_code_{{ counter }}_{{ block_counter }}">Код:</label>
-            <textarea id="chapter_code_{{ counter }}_{{ block_counter }}" name="chapter_code_{{ counter }}_{{ block_counter }}" required>{{ block['data'] }}</textarea><br>
-            {% elif block['type'] == 'image' %}
-            <label for="chapter_image_{{ counter }}_{{ block_counter }}">Изображение:</label>
-            <input type="text" id="chapter_image_{{ counter }}_{{ block_counter }}" name="chapter_image_{{ counter }}_{{ block_counter }}" value="{{ block['data'] }}" required><br>
-            {% endif %}
-            {% set block_counter = block_counter + 1 %}
-            {% endfor %}
-            {% set counter = counter + 1 %}
+            <label for="chapter_text_{{ counter }}">Введите Текст</label>
+            <textarea id="chapter_text_{{ counter }}" name="chapter_text_{{ counter }}" required>{{ chapter['text'] }}</textarea><br>
+            <label for="chapter_video_{{ counter }}">Введите Видео-ссылку</label>
+            <input type="text" id="chapter_video_{{ counter }}" name="chapter_video_{{ counter }}" value="{{ chapter['video'] }}" ><br>
+            <label for="chapter_code_{{ counter }}">Введите Код</label>
+            <textarea id="chapter_code_{{ counter }}" name="chapter_code_{{ counter }}" required>{{ chapter['code'] }}</textarea><br>
+            <label for="chapter_image_{{ counter }}">Введите Изображение</label>
+            <input type="text" id="chapter_image_{{ counter }}" name="chapter_image_{{ counter }}" value="{{ chapter['image'] }}" ><br>
             {% endfor %}
 
             <button type="submit">Сохранить изменения</button>

@@ -45,17 +45,19 @@ margin-top:-12px;
 }
 
 .courses{
-    width: 1000px;
-    height: 700px;
-    display: flex;
+    width: auto;
+    height: auto;
+    display: grid;
+    grid-template-columns: 300px 300px 290px;
+    grid-template-rows: auto;
     align-items:center;
-    justify-content: center;
     position: absolute;
     top:50%;
     left: 50%;
     transform: translate(-50% , -50%);
     background-color: #495d64;
     border-radius: 50px;
+    margin-top: 20px;
 }
 .add_button {
     background-color: #4CAF50;
@@ -131,6 +133,14 @@ margin-top:-12px;
     display: none;
     border-radius: 20px;
     cursor: pointer;
+}
+
+.testButton {
+    top: 10px;
+    right: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-right: 200px;
 }
 
 .courseBox:hover .editButton {
