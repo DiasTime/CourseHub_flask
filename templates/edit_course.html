@@ -61,6 +61,7 @@
             <textarea id="chapter_code_{{ counter }}" name="chapter_code_{{ counter }}" required>{{ chapter['code'] }}</textarea><br>
             <label for="chapter_image_{{ counter }}">Введите Изображение</label>
             <input type="text" id="chapter_image_{{ counter }}" name="chapter_image_{{ counter }}" value="{{ chapter['image'] }}" ><br>
+            
             {% endfor %}
 
             <button type="submit">Сохранить изменения</button>
