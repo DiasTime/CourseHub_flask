@@ -4,14 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Test</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style5.css') }}" type="text/css">
 </head>
 <body>
-    <h1>Add Test for Course {{ course_name }}</h1>
+<div class="container">
+    <h1>Добавте тест для курса- {{ course_name }}</h1>
     <form action="{{ url_for('add_test', courseId=courseId) }}" method="post" enctype="multipart/form-data">
-        <input type="file" name="file">
-        <button type="submit">Upload</button>
+        <label for="file" class="file-label">
+            {% if upload_status == "success" %}
+                Тест Загружен!
+            {% else %}
+                Выберете файл
+            {% endif %}
+        </label>
+        <input id="file" type="file" name="file" class="file-input">
+        <input type="number" name="quiz_time" placeholder="Часы на выполнение теста" class="quiz-time-input">
+        
+
+        <button type="submit" class="upload-button">Загрузить!</button>
     </form>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

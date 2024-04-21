@@ -136,10 +136,24 @@ margin-top:-12px;
 }
 
 .testButton {
-   
-    margin-right: 200px;
+    position: absolute;
+    border-radius: 20px;
+
+    margin-right: 40px;
+    margin-top: 170px;
+
+}
+.testButton:hover {
+    cursor: pointer;
+    background-color: rgba(173, 86, 86, 0.205);
+
+
 }
 
 .courseBox:hover .editButton {
+    display: block;
+}
+
+.courseBox:hover .testButton {
     display: block;
 }

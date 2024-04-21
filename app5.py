@@ -17,12 +17,14 @@ def index():
 @app.route('/add_test/<int:courseId>', methods=['GET', 'POST'])
 def add_test(courseId):
     course_doc_id = f"course_{courseId}"
+    upload_status = "upload"  # Состояние кнопки по умолчанию
+    
     if request.method == 'GET':
         course_ref = db.collection('courses').document(course_doc_id)
         course_data = course_ref.get().to_dict()
         if course_data:
             course_name = course_data.get('course_name', 'Unknown Course')
-            return render_template('add_test.html', courseId=courseId, course_name=course_name)
+            return render_template('add_test.html', courseId=courseId, course_name=course_name, upload_status=upload_status)
         else:
             return "Курс не найден"
     elif request.method == 'POST':
@@ -39,6 +41,12 @@ def add_test(courseId):
             
             if not courseId:
                 return "Не указан идентификатор курса"
+            
+            # Получаем время выполнения теста из формы
+            quiz_time = request.form.get('quiz_time')
+            
+            if not quiz_time:
+                return "Не указано время теста"
             
             # Чтение файла docx
             doc = Document(file)
@@ -72,7 +80,7 @@ def add_test(courseId):
             if current_question:
                 questions.append(current_question)
             
-            # Обновление документа курса с новыми вопросами
+            # Обновление документа курса с новыми вопросами и временем теста
             course_ref = db.collection('courses').document(course_doc_id)
             course_data = course_ref.get().to_dict()
             if course_data is None:
@@ -81,9 +89,12 @@ def add_test(courseId):
                 course_data['questions'].extend(questions)
             else:
                 course_data['questions'] = questions
+            course_data['quiz_time'] = int(quiz_time)  # Конвертируем время в целое число
             course_ref.set(course_data)
             
-            return redirect(url_for('index'))
-
+            upload_status = "success"  # Установка состояния кнопки на "success"
+            
+            return render_template('add_test.html', courseId=courseId, upload_status=upload_status)
+        
 if __name__ == '__main__':
     app.run(debug=True, port=5004)
