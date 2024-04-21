@@ -34,13 +34,13 @@ def update_course(course_id):
     course_name = request.form['course_name']
     course_slogan = request.form['course_slogan']
 
+    # Получаем текущий курс из Firestore
+    course = get_course(course_id)
+
     # Обновляем описание курса
-    course_descriptions = []
-    for key, value in request.form.items():
-        if key.startswith('course_description_'):
-            course_description_num = key.split('_')[-1]
-            course_description = value
-            course_descriptions.append(course_description)
+    course_descriptions = [value for key, value in request.form.items() if key.startswith('course_description_')]
+    if not course_descriptions:
+        course_descriptions = course.get('course_descriptions', [])
 
     # Обновляем данные глав
     chapters = []
@@ -50,22 +50,16 @@ def update_course(course_id):
             chapter_content = {
                 'title': request.form.get(f'chapter_title_{chapter_num}'),
                 'content': request.form.get(f'chapter_content_{chapter_num}'),
-                'code': [],
-                'image': [],
-                'text': [],
-                'video': []
+                'video': request.form.getlist(f'chapter_video_{chapter_num}'),
+                'code': request.form.getlist(f'chapter_code_{chapter_num}'),
+                'image': request.form.getlist(f'chapter_image_{chapter_num}'),
+                'text': request.form.getlist(f'chapter_text_{chapter_num}')
             }
 
-            # Обработка данных блоков главы
-            for block_key, block_value in request.form.items():
-                if block_key.startswith(f'chapter_code_{chapter_num}_'):
-                    chapter_content['code'].append(block_value)
-                elif block_key.startswith(f'chapter_image_{chapter_num}_'):
-                    chapter_content['image'].append(block_value)
-                elif block_key.startswith(f'chapter_text_{chapter_num}_'):
-                    chapter_content['text'].append(block_value)
-                elif block_key.startswith(f'chapter_video_{chapter_num}_'):
-                    chapter_content['video'].append(block_value)
+            # Если данные пусты, используем текущие данные из Firestore
+            for key in ('video', 'code', 'image', 'text'):
+                if not chapter_content[key]:
+                    chapter_content[key] = course['chapters'][int(chapter_num) - 1][key]
 
             chapters.append(chapter_content)
 
@@ -83,7 +77,10 @@ def update_course(course_id):
         "chapters": chapters
     })
 
-    return redirect(url_for('courses'))
+    return 'Курс успешно обновлен и сохранен в Firestore.'
+
+
+
 
 
 if __name__ == '__main__':

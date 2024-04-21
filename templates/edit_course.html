@@ -1,18 +1,16 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Изменение курса</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style3.css') }}" type="text/css">
 </head>
 <body>
     <header>
         <div class="left-side-menu">
             <div class="logo">
-                <a href="http://localhost:5173/"><img src="https://iimg.su/s/11/AltVHu4JfYDeHkhn0KM1Ltzt8qQZlTNFQKEiBcvl.png"></a>
-                <h1 class="logo-title">Онлайн учебник</h1>
+                <h1 class="logo-title">Course</h1>
             </div>
         </div>
     </header>
@@ -53,19 +51,33 @@
             <input type="text" id="chapter_title_{{ counter }}" name="chapter_title_{{ counter }}" value="{{ chapter['title'] }}" required><br>
             <label for="chapter_content_{{ counter }}">Содержание главы:</label>
             <textarea id="chapter_content_{{ counter }}" name="chapter_content_{{ counter }}" required>{{ chapter['content'] }}</textarea><br>
-            <label for="chapter_text_{{ counter }}">Введите Текст</label>
-            <textarea id="chapter_text_{{ counter }}" name="chapter_text_{{ counter }}" required>{{ chapter['text'] }}</textarea><br>
-            <label for="chapter_video_{{ counter }}">Введите Видео-ссылку</label>
-            <input type="text" id="chapter_video_{{ counter }}" name="chapter_video_{{ counter }}" value="{{ chapter['video'] }}" ><br>
-            <label for="chapter_code_{{ counter }}">Введите Код</label>
-            <textarea id="chapter_code_{{ counter }}" name="chapter_code_{{ counter }}" required>{{ chapter['code'] }}</textarea><br>
-            <label for="chapter_image_{{ counter }}">Введите Изображение</label>
-            <input type="text" id="chapter_image_{{ counter }}" name="chapter_image_{{ counter }}" value="{{ chapter['image'] }}" ><br>
             
+            {% for code in chapter['code'] %}
+            <label for="chapter_code_{{ counter }}_{{ loop.index }}">Введите Код {{ loop.index }}</label>
+            <textarea id="chapter_code_{{ counter }}_{{ loop.index }}" name="chapter_code_{{ counter }}_{{ loop.index }}">{{ code }}</textarea><br>
             {% endfor %}
-
+            
+            {% for image in chapter['image'] %}
+            <label for="chapter_image_{{ counter }}_{{ loop.index }}">Введите Изображение {{ loop.index }}</label>
+            <textarea id="chapter_image_{{ counter }}_{{ loop.index }}" name="chapter_image_{{ counter }}_{{ loop.index }}">{{ image }}</textarea><br>
+            {% endfor %}
+            
+            {% for text in chapter['text'] %}
+            <label for="chapter_text_{{ counter }}_{{ loop.index }}">Введите Текст {{ loop.index }}</label>
+            <textarea id="chapter_text_{{ counter }}_{{ loop.index }}" name="chapter_text_{{ counter }}_{{ loop.index }}">{{ text }}</textarea><br>
+            {% endfor %}
+            
+            {% for video in chapter['video'] %}
+            <label for="chapter_video_{{ counter }}_{{ loop.index }}">Введите Видео-ссылку {{ loop.index }}</label>
+            <textarea id="chapter_video_{{ counter }}_{{ loop.index }}" name="chapter_video_{{ counter }}_{{ loop.index }}">{{ video }}</textarea><br>
+            {% endfor %}
+            
+            {% set counter = counter + 1 %}
+            {% endfor %}
+        
             <button type="submit">Сохранить изменения</button>
-        </form>
+
     </div>
+    
 </body>
 </html>

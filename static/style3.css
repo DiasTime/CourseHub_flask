@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-image: url('background-image.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+.edit-course-wrapper {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-top: 10px;
+}
+
+input[type="text"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+button[type="submit"],
+button[type="button"] {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+button[type="submit"]:hover,
+button[type="button"]:hover {
+    filter: blur(2);
+    background-color: rgba(0, 123, 255, 0.295);
+
+}
+
+@media screen and (max-width: 600px) {
+    .edit-course-wrapper {
+        padding: 10px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    textarea {
+        width: calc(100% - 20px);
+    }
+}
+/* Apply styles to text input */
+input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(3em + 2px); /* Adjust according to border */
+    margin: 0 0 1em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 1.5em; /* Half of height */
+    background: #fff;
+    resize: none;
+    outline: none;
+  }
+  
+  /* Apply styles to textarea */
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    height: calc(6em + 2px); /* Adjust according to border */
+    margin: 0 0 1em;
+    padding: 1em;
+    border: 1px solid #ccc;
+    border-radius: 1.5em; /* Half of height */
+    background: #fff;
+    resize: none;
+    outline: none;
+  }
+  
+  /* Apply styles when input is required and focused */
+  input:required:focus,
+  textarea:required:focus {
+    border-color: #00bafa;
+  }
+  
+  /* Apply styles to placeholder label */
+  input:required:focus + label[placeholder]:before,
+  textarea:required:focus + label[placeholder]:before {
+    transform: translate(0, -1.5em) scale(0.9);
+  }
+  
+  /* Apply styles to placeholder label content */
+  input:invalid + label[placeholder][alt]:before,
+  textarea:invalid + label[placeholder][alt]:before {
+    content: attr(alt);
+  }
+  
+  /* Apply transition to placeholder label */
+  input:required:focus + label[placeholder]:before,
+  textarea:required:focus + label[placeholder]:before,
+  input:invalid + label[placeholder][alt]:before,
+  textarea:invalid + label[placeholder][alt]:before {
+    transition-duration: 0.2s;
+  }
+  
+  /* Apply styles to placeholder label text */
+  label[placeholder]:before {
+    content: attr(placeholder);
+    display: inline-block;
+    margin: 0 1em;
+    padding: 0 2px;
+    color: #898989;
+    white-space: nowrap;
+    background-image: linear-gradient(to bottom, #fff, #fff);
+    background-size: 100% 5px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  
