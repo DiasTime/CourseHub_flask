@@ -148,3 +148,16 @@ button:hover {
   font-size: 12px;
   color: #777;
 }
+
+.remove-button {
+  border: none;
+  background-color: rgba(129, 72, 72, 0.685);
+  color: white;
+  border-radius: 25px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.remove-button:hover{
+  background-color: brown;
+}
