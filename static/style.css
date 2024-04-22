@@ -150,14 +150,18 @@ button:hover {
 }
 
 .remove-button {
-  border: none;
-  background-color: rgba(129, 72, 72, 0.685);
-  color: white;
+  border: 2px;
+  background-color: rgba(158, 158, 158, 0.685);
+  color: rgb(138, 78, 78);
   border-radius: 25px;
-  padding: 5px;
+  border-color: #000000;
+  padding: 2px;
   cursor: pointer;
+  width: 45px;
 }
 
 .remove-button:hover{
-  background-color: brown;
+border-radius: 10px;
+
+
 }

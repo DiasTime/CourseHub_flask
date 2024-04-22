@@ -86,20 +86,14 @@
                 chaptersDiv.removeChild(lastChapter);
             }
         }
-        function removeDescription(descriptionId) {
-            var descriptionDiv = document.getElementById(descriptionId);
-            var descriptionIdParts = descriptionId.split('_');
-            var descriptionNumber = descriptionIdParts[1];
-            var descriptionFieldId = 'course_description_' + descriptionNumber;
-        
-            var descriptionField = document.getElementById(descriptionFieldId);
-            if (descriptionField) {
-                descriptionField.remove();
+        function removeLastDescription() {
+            var descriptionsDiv = document.getElementById('course_descriptions');
+            var lastDescription = descriptionsDiv.lastElementChild;
+            if (lastDescription) {
+                descriptionsDiv.removeChild(lastDescription.previousSibling); // Удаление элемента br
+                descriptionsDiv.removeChild(lastDescription);
             }
-        
-            descriptionDiv.remove();
         }
-        
 
         function addTextBlock(chapterId) {
             var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
@@ -117,15 +111,28 @@
         function addVideoBlock(chapterId) {
             var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
             var nextTextBlockNum = textBlocksDiv.children.length + 1;
-
+        
             var videoBlockDiv = document.createElement('div');
             videoBlockDiv.innerHTML = `
                 <label for="chapter_video_${chapterId}_${nextTextBlockNum}">Видео:</label>
-                <textarea id="chapter_video_${chapterId}_${nextTextBlockNum}" name="chapter_video_${chapterId}_${nextTextBlockNum}" required onmouseover="addRemoveButton('chapter_video_${chapterId}_${nextTextBlockNum}')" onmouseout="removeRemoveButton('chapter_video_${chapterId}_${nextTextBlockNum}')"></textarea><br>
+                <textarea id="chapter_video_${chapterId}_${nextTextBlockNum}" name="chapter_video_${chapterId}_${nextTextBlockNum}" required onmouseover="addRemoveButton('chapter_video_${chapterId}_${nextTextBlockNum}')" onmouseout="removeRemoveButton('chapter_video_${chapterId}_${nextTextBlockNum}')" onchange="convertToEmbedLink(this)"></textarea><br>
                 
             `;
             textBlocksDiv.appendChild(videoBlockDiv);
         }
+        
+        function convertToEmbedLink(textarea) {
+            var link = textarea.value;
+            if (link.includes("youtube.com/watch")) {
+                var videoId = link.split('v=')[1];
+                var ampersandPosition = videoId.indexOf('&');
+                if (ampersandPosition !== -1) {
+                    videoId = videoId.substring(0, ampersandPosition);
+                }
+                textarea.value = `https://www.youtube.com/embed/${videoId}`;
+            }
+        }
+        
 
         function addCodeBlock(chapterId) {
             var textBlocksDiv = document.getElementById(`text_blocks_${chapterId}`);
