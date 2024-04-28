@@ -14,6 +14,7 @@
             </div>
         </div>
     </header>
+    <button id="add-chapter-btn" type="button">Добавить главу</button>
     <div class="edit-course-wrapper">
         <h1>Изменение курса</h1>
         <form action="/update_course/{{ course['courseId'] }}" method="post">
@@ -46,7 +47,7 @@
             {% set counter = 1 %}
             {% for chapter in course['chapters'] %}
             <hr>
-            <h2>Глава {{ counter }}</h2>
+            <h2>Глава {{ loop.index }}</h2>
             <label for="chapter_title_{{ counter }}">Заголовок главы:</label>
             <input type="text" id="chapter_title_{{ counter }}" name="chapter_title_{{ counter }}" value="{{ chapter['title'] }}" required><br>
             <label for="chapter_content_{{ counter }}">Содержание главы:</label>

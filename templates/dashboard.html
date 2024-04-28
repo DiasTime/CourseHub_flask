@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
+    <title>CourseHub</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style2.css') }}" type="text/css">
 
 </head>
 <body>
     <header class="header">
-        <h1>Dashboard</h1>
+        <h1>CourseHub Admin</h1>
         <div>
             <button class="button">Войти</button>
         </div>
@@ -79,13 +79,23 @@
                 window.location.href = testUrl;
             });
 
+            const deleteButton = document.createElement('button');
+            deleteButton.classList.add('deleteButton'); 
+            deleteButton.innerText = ' Удалить курс';
+            deleteButton.addEventListener('click', function() {
+                const deleteUrl = `http://127.0.0.1:5006//delete_course/${course.courseId}`;
+                window.location.href = deleteUrl;
+            });
+
+
+
             
-  
 
             courseBox.appendChild(topContent);
             courseBox.appendChild(bottomContent);
             courseBox.appendChild(testButton);
             courseBox.appendChild(editButton);
+            courseBox.appendChild(deleteButton); 
 
             root.appendChild(courseBox);
         });

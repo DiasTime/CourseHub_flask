@@ -73,9 +73,11 @@ def add_test(courseId):
                             # Извлекаем варианты ответов из метки
                             current_question['variants'].append(part.split('>')[1])
                         # Ищем правильный ответ
+                        # Ищем правильный ответ
                         elif part.startswith('<a>'):
-                            # Извлекаем правильный ответ из метки
-                            current_question['correct'] = int(part.split('>')[1])
+                            # Извлекаем правильный ответ из метки и вычитаем 1
+                            current_question['correct'] = int(part.split('>')[1]) - 1
+
 
             if current_question:
                 questions.append(current_question)

@@ -1,98 +1,105 @@
-/* CSS стили здесь */
+/* CSS styles here */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    background-color: #F8FAFB; /* Light gray background */
 }
 
 header {
     background-color: #333;
     color: #fff;
-    padding: 10px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80%;
+    height: 60px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
-.search{
 
+
+.search {
+    width: 300px;
+    height: 30px;
+    padding: 10px 10px;
+    border-radius: 20px;
+    display: inline-block;
+    cursor: text;
+    text-align: left;
+    margin: 10px 20px;
+    font-size: 16px;
+    border: 0px;
+    transition: all 0.3s ease;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.247);
     
 
-width: 10%;
-height: 200%;
-padding: 10px 20px;
-border-radius: 10px;
-display: inline-block;
-cursor: text;
-text-align:left;
-margin: 4px 2px;
-margin-left: 580px;
-margin-top:-12px;
+}
+
+.search:hover{
+    transform: translateY(-1px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.search:focus {
+    border-color: #4CAF50;
+    box-shadow: 0 5px 5px rgba(76, 175, 80, 0.5); /* Green shadow on focus */
+    border: 0px;
 
 }
+
 .button {
     background-color: #4CAF50;
     border: none;
     color: white;
-    padding: 10px 20px; 
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 5px;
-}
-
-.courses{
-    width: auto;
-    height: auto;
-    display: grid;
-    grid-template-columns: 300px 300px 290px;
-    grid-template-rows: auto;
-    align-items:center;
-    position: absolute;
-    top:50%;
-    left: 50%;
-    transform: translate(-50% , -50%);
-    background-color: #495d64;
-    border-radius: 50px;
-    margin-top: 20px;
-}
-.add_button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin: 0 20px;
     cursor: pointer;
     border-radius: 5px;
-    margin-left: 1900px;
+    transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
 }
 
 .button:hover {
     background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
+    color: #fff; /* Ensure text color change on hover */
+}
+
+.courses {
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
 
 .courseBox {
     width: 250px;
-    height: 200px;
+    height: 300px;
     margin: 20px;
     border: 1px solid #ccc;
     border-radius: 10px;
     overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f8f8;
     position: relative;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.courseBox:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
 }
 
 .topContent {
-    background-color: #2c3e50;
+    background-color: #4CAF50;
     color: #fff;
     padding: 10px;
     display: flex;
@@ -102,10 +109,6 @@ margin-top:-12px;
 
 .topContent h3 {
     margin: 0;
-}
-
-.fav {
-    cursor: pointer;
 }
 
 .bottomContent {
@@ -128,32 +131,80 @@ margin-top:-12px;
 
 .editButton {
     position: absolute;
-    top: 10px;
+    bottom: 10px;
     right: 10px;
-    display: none;
     border-radius: 20px;
     cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    display: none
 }
-
 .testButton {
     position: absolute;
+    bottom: 10px;
+    right: 10px;
     border-radius: 20px;
-
-    margin-right: 40px;
-    margin-top: 170px;
-
-}
-.testButton:hover {
     cursor: pointer;
-    background-color: rgba(173, 86, 86, 0.205);
-
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    margin-bottom: 40px;
+    display: none
 
 }
 
-.courseBox:hover .editButton {
-    display: block;
+.deleteButton {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    margin-right: 125px;
+    display: none
 }
 
+.editButton:hover,
+.deleteButton:hover,
+.testButton:hover {
+    transform: translateY(-2px) scale(1.05);
+    background-color: #45a049;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Added shadow on hover */
+
+}
+
+.add_button {
+    background-color: #4CAF50; /* Зеленый цвет кнопки */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Плавное изменение цвета фона и размера кнопки */
+
+}
+
+.add_button:hover {
+    background-color: #45a049; /* Зеленый цвет кнопки при наведении */
+    transform: translateY(-2px); /* Небольшое поднятие кнопки при наведении */
+}
+
+.courseBox:hover .editButton,
+.courseBox:hover .deleteButton,
 .courseBox:hover .testButton {
-    display: block;
+    display: block; /* Отображаем кнопки при наведении на .courseBox */
 }
+

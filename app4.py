@@ -31,5 +31,6 @@ def delete_course(course_id):
     doc_ref.delete()
     return jsonify({'message': 'Course deleted successfully'})
 
+
 if __name__ == '__main__':
     app.run(debug=True, port=5003)
