@@ -37,7 +37,7 @@
 
             {% set counter = 1 %}
             {% for description in course['course_descriptions'] %}
-            <label for="course_description_{{ counter }}">Описание курса {{ counter }}:</label>
+            <label for="course_description_{{ counter }}">Описание курса {{ loop.index }}:</label>
             <input type="text" id="course_description_{{ counter }}" name="course_description_{{ counter }}" value="{{ description }}" required><br>
             {% set counter = counter + 1 %}
             {% endfor %}
