@@ -8,14 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" type="text/css">
 </head>
 <body>
-    <header>
-        <div class="left-side-menu">
-            <div class="logo">
-                <a href="http://localhost:5173/"><img src="https://iimg.su/s/11/AltVHu4JfYDeHkhn0KM1Ltzt8qQZlTNFQKEiBcvl.png"></a>
-                <h1 class="logo-title">Онлайн учебник</h1>
-            </div>
-        </div>
-    </header>
+
     <div class="add-course-wrapper">
         <h1>Добавление курса</h1>
         <form action="/add_course" method="post">
@@ -32,7 +25,7 @@
             <input type="text" id="video_src" name="video_src" required><br>
            
             <label for="course_name">Краткое описание:</label>
-            <input type="text" id="course_name" maxlength="20" name="course_name" required><br>
+            <input type="text" id="course_name" maxlength="60" name="course_name" required><br>
 
             <label for="course_slogan">Слоган:</label>
             <input type="text" id="course_slogan" maxlength="60" name="course_slogan"  required><br>

@@ -1,167 +1,147 @@
-@import url('https://fonts.googleapis.com/css?family=Poppins:700|Merriweather:400');
-
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
-
+/* Общие стили */
 body {
-  background-color: #fff;
-  font-family: 'Merriweather', sans-serif;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #F8FAFB; /* Светло-серый фон */
 }
 
 header {
-  width: 100%;
-  max-width: 1180px;
-  margin: 0 auto;
-  padding: 30px 0;
-}
-
-.left-side-menu {
-  display: flex;
-}
-
-.logo {
-  display: flex;
-  cursor: pointer;
-}
-
-.logo-title {
-  color: #1a1a1a;
-  font-size: 20px;
-}
-
-.logo img {
-  height: 60px;
-  margin-top: -18px;
-  padding: 0;
-}
-
-.add-course-wrapper,
-.add-chapter-wrapper {
-  width: calc(50% - 20px); /* Разделение на две части */
-  margin: 50px 10px;
-  float: left;
-}
-
-.add-course-wrapper h1,
-.add-chapter-wrapper h1 {
-  text-align: center;
-  margin-bottom: 20px;
-  font-size: 32px;
-}
-
-form {
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="date"],
-textarea {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  font-size: 16px;
-}
-
-button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  background-color: #c7b8ec;
+  background-color: #333;
   color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #a99bd1;
-}
-
-
-.add-chapter-wrapper {
-  margin-top: 55px;
-  width: calc(50% - 30px); 
-  margin: px 10px;
-  float: auto; 
-  max-width: 550px
-  
-}
-.courseBox {
-  width: 300px;
-  height: 300px;
-  margin: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #f8f8f8;
-}
-
-.topContent {
-  background-color: #2c3e50;
-  color: #fff;
-  padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 60px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.topContent h3 {
-  margin: 0;
+/* Стили для формы добавления курса */
+.add-course-wrapper {
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 600px;
 }
 
-.fav {
-  cursor: pointer;
+.add-course-wrapper h1 {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-.bottomContent {
-  padding: 10px;
+.add-course-wrapper form {
+  display: flex;
+  flex-direction: column;
 }
 
-.courseName {
-  font-weight: bold;
+.add-course-wrapper label {
   margin-bottom: 5px;
 }
 
-.courseDesc {
+.add-course-wrapper input[type="text"],
+.add-course-wrapper input[type="date"],
+.add-course-wrapper textarea {
+  width: 100%;
+  padding: 8px;
   margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
 }
 
-.courseDetails {
-  font-size: 12px;
-  color: #777;
-}
-
-.remove-button {
-  border: 2px;
-  background-color: rgba(158, 158, 158, 0.685);
-  color: rgb(138, 78, 78);
-  border-radius: 25px;
-  border-color: #000000;
-  padding: 2px;
+.add-course-wrapper button[type="button"],
+.add-course-wrapper button[type="submit"] {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-top: 10px;
   cursor: pointer;
-  width: 45px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.remove-button:hover{
-border-radius: 10px;
+.add-course-wrapper button[type="button"]:hover,
+.add-course-wrapper button[type="submit"]:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+}
 
+/* Стили для блоков глав */
+.add-course-wrapper #chapters {
+  margin-bottom: 20px;
+}
 
+.add-course-wrapper #chapters > div {
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.add-course-wrapper #chapters label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.add-course-wrapper #chapters input[type="text"],
+.add-course-wrapper #chapters textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-course-wrapper #chapters button {
+  margin-top: 10px;
+}
+
+/* Стили для кнопок удаления и добавления */
+.add-course-wrapper .remove-button {
+  background-color: #FF5722;
+  border: none;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  top: -5px;
+  left: -5px;
+  font-size: 12px;
+}
+
+.add-course-wrapper .remove-button:hover {
+  background-color: #F44336;
+}
+
+/* Стили для дополнительных описаний курса */
+.add-course-wrapper #course_descriptions {
+  margin-bottom: 20px;
+}
+
+.add-course-wrapper #course_descriptions label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.add-course-wrapper #course_descriptions textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.add-course-wrapper #course_descriptions button {
+  margin-top: 10px;
 }
