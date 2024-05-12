@@ -208,3 +208,43 @@ header {
     display: block; /* Отображаем кнопки при наведении на .courseBox */
 }
 
+
+/* Добавляем стили для модального окна */
+.modal {
+    display: none; /* Скрываем модальное окно по умолчанию */
+    position: fixed; /* Фиксируем позицию модального окна */
+    z-index: 1; /* Назначаем самый верхний уровень */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto; /* Разрешаем прокрутку страницы при открытом модальном окне */
+    background-color: rgba(0,0,0,0.4); /* Полупрозрачный фон */
+}
+
+/* Стилизация содержимого модального окна */
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    border-radius: 5px;
+    position: relative;
+}
+
+/* Стилизация кнопки закрытия модального окна */
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}

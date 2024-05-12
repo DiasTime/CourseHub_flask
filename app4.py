@@ -1,10 +1,12 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, redirect,url_for
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 import random
 
 app = Flask(__name__)
+
+correct_password = "12345678"
 
 # Initialize Firestore with your credentials
 cred = credentials.Certificate("firestore.json")
@@ -19,6 +21,14 @@ def get_course_documents():
 @app.route('/')
 def index():
     return render_template('dashboard.html')
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'POST':
+        password_attempt = request.form['password']
+        if password_attempt == correct_password:
+            return redirect(url_for('index'))  # Перенаправляем на основную страницу
+    return render_template('login.html')
 
 @app.route('/courses')
 def courses():

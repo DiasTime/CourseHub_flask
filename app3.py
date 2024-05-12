@@ -43,9 +43,7 @@ def confirm_delete(course_id):
             doc_ref.update({u'name': f'course_{missing_course_id}', u'courseId': missing_course_id})
         else:
             # Если документа не существует, создаем его снова
-            doc_ref.set({u'name': f'course_{missing_course_id}', u'courseId': missing_course_id})
-
-    return redirect('/deleted_successfully')
+            return redirect('/deleted_successfully')
 
 @app.route('/deleted_successfully', methods=['GET'])
 def deleted_successfully():
